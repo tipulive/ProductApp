@@ -1,0 +1,43 @@
+### Api Link
+@baseUrl = http://localhost:3000/api/v1
+@email=User@gmail.com
+
+###password
+@password=1
+###Authentication Token
+@Auth_token=yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNvbXBhbnlAZ21haWwuY29tIiwiaWF0IjoxNjgyNjQxMDk0fQ.32djvEHsljCnZrPj1pdIGQn2IeFr7bTOY4jAZR9eaGw
+### test
+
+### Register New User
+POST  {{baseUrl}}/register
+Content-Type: application/json
+
+{
+"name": "name",
+"email": "{{email}}",
+"password": "{{password}}"
+
+
+}
+### Login New User
+POST  {{baseUrl}}/login
+Content-Type: application/json
+
+{
+"email": "{{email}}",
+"password": "{{password}}"
+
+}
+
+### Login Auth
+POST  {{baseUrl}}/loginauth
+Content-Type: application/json
+
+{
+"username": "{{email}}",
+"password": "{{password}}"
+
+}
+
+
+

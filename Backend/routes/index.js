@@ -4,7 +4,13 @@ const router=express.Router();
 
 
 
-router.post('/',async(req,res) => {
+router.post('/register',async(req,res) => {
+    
+    
+
+});
+
+router.post('/login',async(req,res) => {
     
     
 
