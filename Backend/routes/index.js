@@ -1,10 +1,11 @@
 const express=require('express');
 const User=require("../Controllers/UserController");
+const Product=require("../Controllers/ProductController");
 const jwt = require('jsonwebtoken');
 const router=express.Router();
 
 
-
+const tokenSuspendList = new Set();
 
 router.post('/register',async(req,res) => {
     
@@ -19,6 +20,59 @@ router.post('/login',async(req,res) => {
     res.json(resultData);
 
 });
+router.post('/logout', (req, res) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+  
+    if (token == null) {
+      return res.status(401).json({ 
+          status:false,
+          message: 'Unauthorized' });
+    }
+  
+    tokenSuspendList.add(token);
+    res.json({
+        status:true,
+         message: 'Logged out successfully' 
+        });
+  });
+//Crud Of Products List
+
+router.post('/addProduct',CheckAuthToken,async(req,res) => {
+    req.body.uid = 'John';
+   
+
+    products=req.body;
+
+    res.json((await Product.ProductController.addProduct(products)));
+
+});
+router.get('/getProducts',CheckAuthToken,async(req,res) => {
+    
+    
+    res.json((await Product.ProductController.getProducts()));
+
+});
+
+router.get('/getProduct/:id',CheckAuthToken,async(req,res) => {
+    
+    
+    res.json((await Product.ProductController.getProduct(req)));
+
+});
+
+router.put('/updateProduct/:id',CheckAuthToken,async(req,res) => {
+ 
+    res.json((await Product.ProductController.updateProduct(req)));
+
+});
+router.delete('/deleteProduct/:id',CheckAuthToken,async(req,res) => {
+    
+    
+    res.json((await Product.ProductController.deleteProduct(req)));
+
+});
+
 
 router.get('/protect', CheckAuthToken, (req, res) => {
     res.json({ message: `Hello, ${req.user.email}!` });
@@ -30,14 +84,22 @@ function CheckAuthToken(req, res, next) {
     const token = authHeader && authHeader.split(' ')[1];
     if (token == null) {
       // Return an error response if the JWT token is missing
-      return res.sendStatus(401);
+      return res.status(401).json({ 
+          status:false,
+          message: 'Unauthorized' 
+    });
     }
+    if (tokenSuspendList.has(token)) {
+        return res.status(401).json({ message: 'Unauthorized' });
+      }
     // Verify the JWT token using the secret key
     jwt.verify(token,process.env.JWT_KEY, (err, user) => {
       if (err) {
         // Return an error response if the JWT token is invalid
-        return res.sendStatus(403);
-        //res.status(403).json({ message: 'Authentication is invalid error' });
+        
+        res.status(403).json({ 
+            status:false,
+            message: 'Authentication is invalid' });
       }
       // Store the user object in the request object
       req.user = user;

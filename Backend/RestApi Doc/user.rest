@@ -5,7 +5,7 @@
 ###password
 @password=1
 ###Authentication Token
-@Auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxOUBnbSIsImlhdCI6MTY4Mjc4Nzg1MSwiZXhwIjoxNjgyNzkxNDUxfQ.QPeczM0X5VbF7m-qtKDQ0RG_XgOHQohRP1BiuozdEqY
+@Auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxOUBnbSIsImlhdCI6MTY4Mjc5OTc3NX0.hiPCqvI04e28CvbGg_Yf7oVfaqBOX0B6OBdgw8xXFIw
 ### test
 
 ### Register New User
@@ -28,6 +28,56 @@ Content-Type: application/json
 "password": "{{password}}"
 
 }
+
+### Logout
+POST  {{baseUrl}}/logout
+Content-Type: application/json
+Authorization: Bearer {{Auth_token}}
+
+### Insert New Records
+POST  {{baseUrl}}/addProduct
+Content-Type: application/json
+Authorization: Bearer {{Auth_token}}
+
+{
+"name": "nyota",
+"price":"45",
+"description": "ghhhjgj"
+
+}
+
+
+### Get all Records
+GET  {{baseUrl}}/getProducts
+content-type: application/json;charset=UTF-8
+Authorization: Bearer {{Auth_token}}
+
+### Get a record by id (here you may pass id through link)
+GET  {{baseUrl}}/getProduct/3
+content-type: application/json;charset=UTF-8
+Authorization: Bearer {{Auth_token}}
+
+
+### Update a record by id(here you may pass id through link)
+PUT  {{baseUrl}}/updateProduct/1
+content-type: application/json;charset=UTF-8
+Authorization: Bearer {{Auth_token}}
+
+{
+"name":"keb",
+"description":"jeje",
+"price":"34"
+
+
+}
+
+
+### Delete a record by id(here you may pass id through link)
+DELETE {{baseUrl}}/deleteProduct/2
+content-type: application/json;charset=UTF-8
+Authorization: Bearer {{Auth_token}}
+
+
 ### protectedAuth
 GET  {{baseUrl}}/protect
 Content-Type: application/json

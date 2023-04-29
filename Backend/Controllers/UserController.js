@@ -133,8 +133,8 @@ exports.UserController = {
           };
       }
 
-      const token = jwt.sign({ email },process.env.JWT_KEY, { expiresIn: '1h' });
-      
+      //const token = jwt.sign({ email },process.env.JWT_KEY, { expiresIn: '1h' }); //because it is simple test no need for expiration
+      const token = jwt.sign({ email },process.env.JWT_KEY);
      // res.status(200).json({ token });
 
       returnValue = {
