@@ -5,7 +5,7 @@
 ###password
 @password=1
 ###Authentication Token
-@Auth_token=yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNvbXBhbnlAZ21haWwuY29tIiwiaWF0IjoxNjgyNjQxMDk0fQ.32djvEHsljCnZrPj1pdIGQn2IeFr7bTOY4jAZR9eaGw
+@Auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxOUBnbSIsImlhdCI6MTY4Mjc4Nzg1MSwiZXhwIjoxNjgyNzkxNDUxfQ.QPeczM0X5VbF7m-qtKDQ0RG_XgOHQohRP1BiuozdEqY
 ### test
 
 ### Register New User
@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
 "name": "name",
-"email": "{{email}}",
+"email": "test19@gm",
 "password": "{{password}}"
 
 
@@ -24,20 +24,17 @@ POST  {{baseUrl}}/login
 Content-Type: application/json
 
 {
-"email": "{{email}}",
+"email": "test19@gm",
 "password": "{{password}}"
 
 }
-
-### Login Auth
-POST  {{baseUrl}}/loginauth
+### protectedAuth
+GET  {{baseUrl}}/protect
 Content-Type: application/json
+Authorization: Bearer {{Auth_token}}
 
-{
-"username": "{{email}}",
-"password": "{{password}}"
 
-}
+
 
 
 
