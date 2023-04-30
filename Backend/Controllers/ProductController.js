@@ -44,7 +44,7 @@ exports.ProductController = {
    
     return new Promise(function(resolve, reject) {
         var returnValue = "";
-        connection.query('SELECT * FROM products', (err, results) => {
+        connection.query('SELECT * FROM products order by id desc', (err, results) => {
             if (err) throw err;
            
             if(results.length > 0) {

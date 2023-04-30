@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
 "name": "name",
-"email": "test19@gm",
+"email": "test19@gm3",
 "password": "{{password}}"
 
 
@@ -25,7 +25,7 @@ Content-Type: application/json
 
 {
 "email": "test19@gm",
-"password": "{{password}}"
+"password": "1"
 
 }
 
@@ -53,7 +53,7 @@ content-type: application/json;charset=UTF-8
 Authorization: Bearer {{Auth_token}}
 
 ### Get a record by id (here you may pass id through link)
-GET  {{baseUrl}}/getProduct/3
+GET  {{baseUrl}}/getProduct/1
 content-type: application/json;charset=UTF-8
 Authorization: Bearer {{Auth_token}}
 
@@ -73,7 +73,7 @@ Authorization: Bearer {{Auth_token}}
 
 
 ### Delete a record by id(here you may pass id through link)
-DELETE {{baseUrl}}/deleteProduct/2
+DELETE {{baseUrl}}/deleteProduct/1
 content-type: application/json;charset=UTF-8
 Authorization: Bearer {{Auth_token}}
 

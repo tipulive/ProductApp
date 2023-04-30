@@ -122,8 +122,9 @@ exports.UserController = {
           message:"Invalid email or password"
           };
       }
+      else{
 
-      const user = results[0];
+        const user = results[0];
       const isPasswordCorrect = await bcrypt.compare(password, user.password);
       if (!isPasswordCorrect) {
         returnValue = {
@@ -132,16 +133,23 @@ exports.UserController = {
           message:"Invalid email or password"
           };
       }
-
+      else{
+        
       //const token = jwt.sign({ email },process.env.JWT_KEY, { expiresIn: '1h' }); //because it is simple test no need for expiration
       const token = jwt.sign({ email },process.env.JWT_KEY);
-     // res.status(200).json({ token });
+      // res.status(200).json({ token });
+ 
+       returnValue = {
+                   
+         status:true,
+         token:token
+         };
+      }
 
-      returnValue = {
-                  
-        status:true,
-        token:token
-        };
+      }
+      
+
+      //code
      
         resolve(returnValue);
     });
