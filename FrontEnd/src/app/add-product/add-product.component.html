@@ -1,1 +1,19 @@
-<p>add-product works!</p>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <label>
+    Name:
+    <input type="text" formControlName="name">
+  </label>
+
+  <label>
+    Price:
+    <input type="number" formControlName="price">
+  </label>
+
+  <label>
+    descr:
+    <input type="text" formControlName="description">
+  </label>
+
+  <button type="submit" [disabled]="myForm.invalid">Submit</button>
+</form>
+<app-home></app-home>

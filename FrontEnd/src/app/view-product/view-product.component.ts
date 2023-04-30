@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-view-product',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./view-product.component.css']
 })
 export class ViewProductComponent {
+
+  constructor(private ProductService: ProductService){}
+  ngOnInit() {
+
+    this.ProductService.getProducts()
+    .subscribe(product => {
+      console.log(product);
+    });
+
+  }
 
 }
