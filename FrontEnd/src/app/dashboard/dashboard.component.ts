@@ -40,6 +40,7 @@ this.router.navigate(['/products']);
     ,
     (error) => {
       this.router.navigate(['']);
+      //console.log('Error status code: ', error.status);
       // Handle the error here
     }
 
