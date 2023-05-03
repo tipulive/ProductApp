@@ -46,6 +46,7 @@ exports.ProductController = {
         var returnValue = "";
         const uidCreator=req.user.email;
         connection.query('SELECT * FROM products where uidCreator=? order by id desc',uidCreator, (err, results) => {
+        //connection.query('SELECT * FROM products order by id desc', (err, results) => {
             if (err) throw err;
            
             if(results.length > 0) {

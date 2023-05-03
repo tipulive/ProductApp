@@ -7,6 +7,8 @@ const router=express.Router();
 
 const tokenSuspendList = new Set();
 
+
+
 router.post('/register',async(req,res) => {
     
     let resultData=await User.UserController.registerUser(req);
