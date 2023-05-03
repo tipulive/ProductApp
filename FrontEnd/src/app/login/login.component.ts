@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Config } from '../config';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent {
   myForm: FormGroup;
   message='';
+  tokenData=new Config();
 
   constructor(private fb: FormBuilder,private auth: AuthenticationService,private router: Router) {
     this.myForm = this.fb.group({
@@ -40,15 +42,17 @@ export class LoginComponent {
     .subscribe(user => {
       if(user.status)
       {
-        //this.router.navigate(['']);
-        console.log(user);
+        this.tokenData.setItem("tokenKeys",user.token)
+        this.router.navigate(['dashboard']);
+
       }
       else{
+        this.message=user.message;
 
       }
 
     });
-    //console.log(this.myForm.value);
+
   }
 
 }

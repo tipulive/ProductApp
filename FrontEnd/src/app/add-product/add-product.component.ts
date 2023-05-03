@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddProductComponent {
   myForm: FormGroup;
+  message:any;
 
   constructor(private fb: FormBuilder,private productService: ProductService,private router: Router) {
     this.myForm = this.fb.group({
@@ -27,13 +28,24 @@ export class AddProductComponent {
     .subscribe(product => {
       if(product.status)
       {
-        this.router.navigate(['']);
+        this.message="Product Added successfully";
+        setTimeout(() => {
+          this.router.navigate(['dashboard']);
+        }, 1000);
       }
       else{
 
       }
-      console.log(product);
-    });
+
+    }
+    ,
+    (error) => {
+      //console.log('Error status code: ', error.status);
+      this.router.navigate(['']);
+      // Handle the error here
+    }
+
+    );
     //console.log(this.myForm.value);
   }
 }

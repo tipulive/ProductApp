@@ -20,7 +20,7 @@ router.post('/login',async(req,res) => {
     res.json(resultData);
 
 });
-router.post('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
   
@@ -54,10 +54,16 @@ router.get('/getProducts',CheckAuthToken,async(req,res) => {
 
 });
 
-router.get('/getProduct/:id',CheckAuthToken,async(req,res) => {
+router.get('/getProductById/:id',CheckAuthToken,async(req,res) => {
     
     
-    res.json((await Product.ProductController.getProduct(req)));
+    res.json((await Product.ProductController.getProductById(req)));
+
+});
+router.get('/getProductByName/:name',CheckAuthToken,async(req,res) => {
+    
+    
+  res.json((await Product.ProductController.getProductByName(req)));
 
 });
 
@@ -84,20 +90,20 @@ function CheckAuthToken(req, res, next) {
     const token = authHeader && authHeader.split(' ')[1];
     if (token == null) {
       // Return an error response if the JWT token is missing
-      return res.status(401).json({ 
+     return res.status(401).json({ 
           status:false,
           message: 'Unauthorized' 
     });
     }
     if (tokenSuspendList.has(token)) {
-        return res.status(401).json({ message: 'Unauthorized' });
+       return res.status(401).json({ message: 'Unauthorized' });
       }
     // Verify the JWT token using the secret key
     jwt.verify(token,process.env.JWT_KEY, (err, user) => {
       if (err) {
         // Return an error response if the JWT token is invalid
         
-        res.status(403).json({ 
+       return res.status(403).json({ 
             status:false,
             message: 'Authentication is invalid' });
       }

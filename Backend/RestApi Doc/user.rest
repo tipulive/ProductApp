@@ -25,12 +25,12 @@ Content-Type: application/json
 
 {
 "email": "test19@gm",
-"password": "1"
+"password": "{{password}}"
 
 }
 
 ### Logout
-POST  {{baseUrl}}/logout
+GET  {{baseUrl}}/logout
 Content-Type: application/json
 Authorization: Bearer {{Auth_token}}
 
@@ -53,9 +53,17 @@ content-type: application/json;charset=UTF-8
 Authorization: Bearer {{Auth_token}}
 
 ### Get a record by id (here you may pass id through link)
-GET  {{baseUrl}}/getProduct/1
+GET  {{baseUrl}}/getProductById/1
 content-type: application/json;charset=UTF-8
 Authorization: Bearer {{Auth_token}}
+
+### Search Product By Name
+
+GET  {{baseUrl}}/getProductByName/nyot
+content-type: application/json;charset=UTF-8
+Authorization: Bearer {{Auth_token}}
+
+
 
 
 ### Update a record by id(here you may pass id through link)

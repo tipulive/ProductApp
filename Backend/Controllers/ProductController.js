@@ -68,11 +68,41 @@ exports.ProductController = {
     });
     
   },
-  getProduct:async(req)=>{//get Product By Id
+  getProductById:async(req)=>{//get Product By Id
     const id = req.params.id;
     return new Promise(function(resolve, reject) {
         var returnValue = "";
         connection.query('SELECT * FROM products WHERE id = ?', id, (err, result) => {
+            if (err) throw err;
+          
+            if(result.length > 0) {
+                returnValue=(
+                    {
+                        "status":true,
+                        "resultData":result,
+                        "message":"Records retrieved"
+                    }
+                );
+            }else{
+                returnValue=(
+                    {
+                        "status":false,
+                        "message":"no Data found"
+                    }
+                );
+            }
+            resolve(returnValue)
+           
+          });
+    });
+    
+  },
+  getProductByName:async(req)=>{//get Product By Id
+    const name = req.params.name;
+    return new Promise(function(resolve, reject) {
+        var returnValue = "";
+        const nameParam = [`%${name}%`];
+        connection.query('SELECT * FROM products WHERE name LIKE ?', nameParam, (err, result) => {
             if (err) throw err;
           
             if(result.length > 0) {

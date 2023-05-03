@@ -18,6 +18,10 @@ export class AuthenticationService {
 
     return this.http.post<User>(`${this.config.apiUrl()}/login`,user,);
   }
+  logout(): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.config.getToken()}`);
+    return this.http.get(`${this.config.apiUrl()}/logout`,{ headers });
+  }
 }
 
 interface User {

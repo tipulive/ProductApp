@@ -13,6 +13,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 
 
@@ -26,7 +28,9 @@ import { AboutComponent } from './about/about.component';
     LoginComponent,
     HeaderComponent,
     FooterComponent,
-    AboutComponent
+    AboutComponent,
+    DashboardComponent,
+    EditProductComponent
   ],
   imports: [
     HttpClientModule,

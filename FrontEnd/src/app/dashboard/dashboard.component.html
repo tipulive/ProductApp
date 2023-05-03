@@ -1,0 +1,40 @@
+<app-header></app-header>
+
+<div class="container">
+
+<div class="mb-3">
+
+  <button class="btn btn-primary"  routerLink="/addProduct" > Add Product</button>
+</div>
+
+<div>
+  <input type="text" class="form-control" placeholder="Search By name" (keyup)="searchName($event)" >
+</div>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>UID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.id }}</td>
+      <td>{{ product.uid }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.description }}</td>
+      <td>
+        <button class="btn btn-sm btn-info" [routerLink]="['/products',product.id]" >Edit</button>
+         <button class="btn btn-sm btn-danger m-2" (click)=deleteProduct(product.id,product.name)>Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+

@@ -12,19 +12,36 @@ config=new Config();
 
   constructor(private http: HttpClient) { }
   getProducts(): Observable<any> {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxOUBnbSIsImlhdCI6MTY4Mjc5OTc3NX0.hiPCqvI04e28CvbGg_Yf7oVfaqBOX0B6OBdgw8xXFIw';
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.config.getToken()}`);
     return this.http.get<Product[]>(`${this.config.apiUrl()}/getProducts`,{ headers });
   }
+  getProductById(id: number): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.config.getToken()}`);
+    return this.http.get<Product[]>(`${this.config.apiUrl()}/getProductById/${id}`,{ headers });
+  }
+  getProductByName(name: any): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.config.getToken()}`);
+    return this.http.get<Product[]>(`${this.config.apiUrl()}/getProductByName/${name}`,{ headers });
+  }
   addProduct(product: Product): Observable<any> {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxOUBnbSIsImlhdCI6MTY4Mjc5OTc3NX0.hiPCqvI04e28CvbGg_Yf7oVfaqBOX0B6OBdgw8xXFIw';
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.config.getToken()}`);
     return this.http.post<Product>(`${this.config.apiUrl()}/addProduct`, product,{ headers });
+  }
+  updateProduct(id:number,product: Product): Observable<any>{
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.config.getToken()}`);
+    return this.http.put<Product>(`${this.config.apiUrl()}/updateProduct/${id}`, product,{ headers });
+  }
+
+  deleteProduct(id:number): Observable<any>{
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.config.getToken()}`);
+    return this.http.delete<Product>(`${this.config.apiUrl()}/deleteProduct/${id}`,{ headers });
   }
 }
 
 interface Product {
   id: number;
+  uid:number;
   name: string;
   description: string;
   price: string;

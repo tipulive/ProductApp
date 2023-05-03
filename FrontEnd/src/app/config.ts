@@ -1,5 +1,6 @@
 
 
+
 export class Config {
   apiUrl(){
     const API_URL = 'http://localhost:3000/api/v1';
@@ -11,7 +12,12 @@ export class Config {
     }
     getToken(){
       let token=localStorage.getItem('tokenKeys');
+
       return token;
+    }
+    deleteToken(){
+      localStorage.removeItem('tokenKeys');
+      return true;
     }
 }
 
