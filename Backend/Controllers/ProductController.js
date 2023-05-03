@@ -40,18 +40,21 @@ exports.ProductController = {
     });
     
   },
-  getProducts:async()=>{//get All Products
+  getProducts:async(req)=>{//get All Products
    
     return new Promise(function(resolve, reject) {
         var returnValue = "";
-        connection.query('SELECT * FROM products order by id desc', (err, results) => {
+        const uidCreator=req.user.email;
+        connection.query('SELECT * FROM products where uidCreator=? order by id desc',uidCreator, (err, results) => {
             if (err) throw err;
            
             if(results.length > 0) {
                 returnValue =(
                     {
                         "status":true,
+                        "user":req.user.email,
                         "resultData":results,
+                        
                         "message":"Records retrieved"
                     }
                 );
@@ -70,9 +73,10 @@ exports.ProductController = {
   },
   getProductById:async(req)=>{//get Product By Id
     const id = req.params.id;
+    const uidCreator=req.user.email;
     return new Promise(function(resolve, reject) {
         var returnValue = "";
-        connection.query('SELECT * FROM products WHERE id = ?', id, (err, result) => {
+        connection.query('SELECT * FROM products WHERE id = ? and uidCreator=?', [id,uidCreator], (err, result) => {
             if (err) throw err;
           
             if(result.length > 0) {
@@ -99,10 +103,11 @@ exports.ProductController = {
   },
   getProductByName:async(req)=>{//get Product By Id
     const name = req.params.name;
+    const uidCreator=req.user.email;
     return new Promise(function(resolve, reject) {
         var returnValue = "";
         const nameParam = [`%${name}%`];
-        connection.query('SELECT * FROM products WHERE name LIKE ?', nameParam, (err, result) => {
+        connection.query('SELECT * FROM products WHERE uidCreator=? and name LIKE ?',[uidCreator,nameParam], (err, result) => {
             if (err) throw err;
           
             if(result.length > 0) {
@@ -132,10 +137,11 @@ exports.ProductController = {
 
     const id = req.params.id;
     const record = req.body;
+    const uidCreator=req.user.email;
    
     return new Promise(function(resolve, reject) {
         var returnValue = "";
-        connection.query('UPDATE products SET ? WHERE id = ?', [record, id], (err, result) => {
+        connection.query('UPDATE products SET ? WHERE id = ? and uidCreator=? limit 1', [record, id,uidCreator], (err, result) => {
             if (err) throw err;
             
         
@@ -162,9 +168,10 @@ exports.ProductController = {
 
   deleteProduct:async(req)=>{//delete Product By Id
     const id = req.params.id;
+    const uidCreator=req.user.email;
     return new Promise(function(resolve, reject) {
         var returnValue = "";
-        connection.query('DELETE FROM products WHERE id = ?', id, (err, result) => {
+        connection.query('DELETE FROM products WHERE id = ? and uidCreator=?', [id,uidCreator], (err, result) => {
             if (err) throw err;
            
             

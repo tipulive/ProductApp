@@ -39,7 +39,8 @@ router.get('/logout', (req, res) => {
 //Crud Of Products List
 
 router.post('/addProduct',CheckAuthToken,async(req,res) => {
-    req.body.uid = 'John';
+    req.body.uidCreator = req.user.email;
+    req.body.uid=getUniqueId();
    
 
     products=req.body;
@@ -50,7 +51,7 @@ router.post('/addProduct',CheckAuthToken,async(req,res) => {
 router.get('/getProducts',CheckAuthToken,async(req,res) => {
     
     
-    res.json((await Product.ProductController.getProducts()));
+    res.json((await Product.ProductController.getProducts(req)));
 
 });
 
@@ -80,9 +81,17 @@ router.delete('/deleteProduct/:id',CheckAuthToken,async(req,res) => {
 });
 
 
-router.get('/protect', CheckAuthToken, (req, res) => {
+router.get('/protect', CheckAuthToken, (req, res) => {//this is testing route only
     res.json({ message: `Hello, ${req.user.email}!` });
+    res.json(getUniqueId());
   });
+
+  function getUniqueId() {
+    const timestamp = Date.now();
+const uniqueID = timestamp.toString(); // convert the timestamp to a string
+
+   return uniqueID
+  }
 function CheckAuthToken(req, res, next) {
     // Get the authorization header
     const authHeader = req.headers['authorization'];

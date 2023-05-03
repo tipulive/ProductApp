@@ -40,7 +40,7 @@ Content-Type: application/json
 Authorization: Bearer {{Auth_token}}
 
 {
-"name": "nyota",
+"name": "gizo",
 "price":"45",
 "description": "ghhhjgj"
 
@@ -53,13 +53,13 @@ content-type: application/json;charset=UTF-8
 Authorization: Bearer {{Auth_token}}
 
 ### Get a record by id (here you may pass id through link)
-GET  {{baseUrl}}/getProductById/1
+GET  {{baseUrl}}/getProductById/4
 content-type: application/json;charset=UTF-8
 Authorization: Bearer {{Auth_token}}
 
 ### Search Product By Name
 
-GET  {{baseUrl}}/getProductByName/nyot
+GET  {{baseUrl}}/getProductByName/v
 content-type: application/json;charset=UTF-8
 Authorization: Bearer {{Auth_token}}
 
@@ -67,21 +67,21 @@ Authorization: Bearer {{Auth_token}}
 
 
 ### Update a record by id(here you may pass id through link)
-PUT  {{baseUrl}}/updateProduct/1
+PUT  {{baseUrl}}/updateProduct/4
 content-type: application/json;charset=UTF-8
 Authorization: Bearer {{Auth_token}}
 
 {
-"name":"keb",
-"description":"jeje",
-"price":"34"
+"name":"vugo",
+"description":"keke",
+"price":"100"
 
 
 }
 
 
 ### Delete a record by id(here you may pass id through link)
-DELETE {{baseUrl}}/deleteProduct/1
+DELETE {{baseUrl}}/deleteProduct/4
 content-type: application/json;charset=UTF-8
 Authorization: Bearer {{Auth_token}}
 
